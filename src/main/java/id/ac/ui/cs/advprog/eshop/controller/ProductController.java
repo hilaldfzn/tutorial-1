@@ -12,7 +12,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/product")
 public class ProductController {
-    
+
     @Autowired
     private ProductService service;
 
@@ -34,5 +34,15 @@ public class ProductController {
         List<Product> allProducts = service.findAll();
         model.addAttribute("products", allProducts);
         return "productList";
+    }
+
+    @GetMapping("/delete/{productId}")
+    public String deleteProductPost(@PathVariable String productId, Model model) {
+        Product product = service.findById(productId);
+        if (product != null) {
+            service.delete(product);
+        }
+        
+        return "redirect:../list";
     }
 }
