@@ -23,7 +23,6 @@ Saya telah menerapkan beberapa *coding standard* pada Tutorial Modul 1, seperti:
     Prinsip-prinsip *clean code* yang belum saya terapkan, yaitu:
     1. Comments        
         Sampai saat ini, saya belum menambahkan *comments* apa pun dalam kode saya karena saya merasa bahwa kode tersebut sudah cukup *concise*. Menurut saya, kode yang saya buat masih terbilang singkat serta mudah untuk dipahami dan dilakukan *tracing*, dan menggunakan penamaan yang jelas sehingga belum ada kebutuhan untuk menambahkan *comments*. Namun, saya terbuka untuk menambahkan *comments* jika kode akan menjadi lebih kompleks pada tutorial ke depannya.
-
         
     2. Error Handling <br/>
         Saya belum melakukan *error handling* karena menurut saya ini belum diperlukan. Hal ini dikarenakan kode saya pada bagian `CREATE`, `EDIT`, dan `DELETE` seharusnya tidak memunculkan error. Meskipun di method `findById()` kemungkinan terjadi error karena mengembalikan *null*. Namun, saya beranggapan bahwa ini tidak akan terjadi karena saya selalu mengirimkan ID yang valid. Jika ada kemungkinan bahwa method tersebut mengembalikan *null*, saya mungkin akan mencoba menggunakan `throw`, `try`, dan `catch`.
@@ -31,10 +30,11 @@ Saya telah menerapkan beberapa *coding standard* pada Tutorial Modul 1, seperti:
 * *Secure Coding* <br/>
 *Secure coding* yang telah saya terapkan adalah penggunaan method `POST` untuk `CREATE`, `EDIT` dan `DELETE` product. Namun, saya belum menerapkan *secure coding* dalam hal *Input Data Validation*. Hal ini terlihat pada kode saya yang belum menangani input *quantity* dengan nilai negatif atau non-integer. *Authentication* dan *Authorization* juga belum diterapkan pada tutorial ini.
 
-Selama mengerjakan tutorial ini, saya mengalami beberapa kesalahan, seperti lupa menambahkan '$' pada `@Value` yang mengganggu fungsi Selenium. Selain itu, saya juga menghadapai masalah pada *functional test*, di mana pada tutorial belum ada arahan untuk membuat *mapping* ke url `http://localhost:8080` yang menyebabkan *title* "ADV Shop" dan *element h3* dengan message "Welcome" tidak ditemukan pada page sehingga test menjadi gagal. Solusinya adalah dengan membuat file baru `HomeController` dengan `@RequestMapping("/")` dan `HomePage.html` agar bisa mengakses `http://localhost:8080` tanpa muncul error sehingga *functional test* akan berhasil.
+Selama mengerjakan tutorial ini, saya mengalami beberapa kesalahan, seperti typo pada saat menambahkan dependencies untuk *unit* dan *functional test* serta lupa menambahkan '$' pada `@Value` yang mengganggu fungsi Selenium. Selain itu, saya juga menghadapai masalah pada *functional test*, di mana pada tutorial belum ada arahan untuk membuat *mapping* ke url `http://localhost:8080` yang menyebabkan *title* "ADV Shop" dan *element h3* dengan message "Welcome" tidak ditemukan pada page sehingga test menjadi gagal. Solusinya adalah dengan membuat *additional file* `HomeController.java` dengan `@RequestMapping("/")` pada *class* `HomeController` serta `@GetMapping("")` pada method `homePage()` yang me*return* "homePage" dan `HomePage.html` agar bisa mengakses `http://localhost:8080` tanpa muncul error sehingga *functional test* akan berhasil.
 
 > [!NOTE]
-> Untuk Testing akan diterapkan pada bagian kedua dari tutorial ini.
+> Untuk *Git Flow* saya menerapkan *branching strategy* seperti yang dijelaskan pada modul 1. <br/>
+> Untuk *Testing* akan diterapkan pada bagian kedua dari tutorial ini.
 
 **Reflection 2**
 
