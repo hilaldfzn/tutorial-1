@@ -29,61 +29,38 @@ class CreateProductFunctionalTest {
 
     @BeforeEach
     void setupTest() {
-        baseUrl = String.format("%s:%d/product/list", testBaseUrl, serverPort);
+        baseUrl = String.format("%s:%d", testBaseUrl, serverPort);
+    }
+
+    @Test
+    void pageTitle_isCorrect(ChromeDriver driver) throws Exception {
+        driver.get(baseUrl + "/product/create");
+        String pageTitle = driver.getTitle();
+
+        assertEquals("Create New Product", pageTitle);
     }
 
     @Test
     void createProduct_isCorrect(ChromeDriver driver) throws Exception {
-        driver.get(baseUrl);
+        createProduct(driver, "iPhone 15 Pro Max", "100");
 
-        WebElement createProductButton = driver.findElement(By.id("create"));
-        createProductButton.click();
-
-        WebElement productNameInput = driver.findElement(By.id("nameInput"));
-        productNameInput.clear();
-        productNameInput.sendKeys("iPhone 15 Pro Max");
-
-        WebElement productQuantityInput = driver.findElement(By.id("quantityInput"));
-        productQuantityInput.clear();
-        productQuantityInput.sendKeys("100");
-
-        WebElement submitButton = driver.findElement(By.id("submit"));
-        submitButton.click();
-        
         List<WebElement> productRows = driver.findElements(By.cssSelector("table tbody tr"));
         WebElement lastProductRow = productRows.get(productRows.size() - 1);
 
-        String actualProductName = lastProductRow.findElement(By.cssSelector("td:nth-child(1)")).getText();
-        assertEquals("iPhone 15 Pro Max", actualProductName);
-
-        String actualProductQuantity = lastProductRow.findElement(By.cssSelector("td:nth-child(2)")).getText();
-        assertEquals("100", actualProductQuantity);
+        verifyProductDetails(lastProductRow, "iPhone 15 Pro Max", "100");
     }
 
     @Test
     void createMoreThanOneProduct_isCorrect(ChromeDriver driver) throws Exception {
         String[][] products = {
             {"iPhone 15 Pro Max", "100"},
-            {"Galaxy S30 Ultra", "150"},
-            {"Pixel 8", "80"}
+            {"Google Pixel 8 Pro", "80"},
+            {"Samsung Galaxy S23 Ultra", "150"},
+            {"Asus ROG Phone 7 Ultimate", "75"}
         };
 
         for (String[] product : products) {
-            driver.get(baseUrl);
-
-            WebElement createProductButton = driver.findElement(By.id("create"));
-            createProductButton.click();
-
-            WebElement productNameInput = driver.findElement(By.id("nameInput"));
-            productNameInput.clear();
-            productNameInput.sendKeys(product[0]);
-
-            WebElement productQuantityInput = driver.findElement(By.id("quantityInput"));
-            productQuantityInput.clear();
-            productQuantityInput.sendKeys(product[1]);
-
-            WebElement submitButton = driver.findElement(By.id("submit"));
-            submitButton.click();
+            createProduct(driver, product[0], product[1]);
         }
 
         List<WebElement> productRows = driver.findElements(By.cssSelector("table tbody tr"));
@@ -91,12 +68,33 @@ class CreateProductFunctionalTest {
 
         for (int i = 0; i < products.length; i++) {
             WebElement productRow = productRows.get(startIndex + i);
-            
-            String actualProductName = productRow.findElement(By.cssSelector("td:nth-child(1)")).getText();
-            assertEquals(products[i][0], actualProductName);
-
-            String actualProductQuantity = productRow.findElement(By.cssSelector("td:nth-child(2)")).getText();
-            assertEquals(products[i][1], actualProductQuantity);
+            verifyProductDetails(productRow, products[i][0], products[i][1]);
         }
+    }
+
+    void createProduct(ChromeDriver driver, String name, String quantity) {
+        driver.get(baseUrl + "/product/list");
+
+        WebElement createProductButton = driver.findElement(By.id("create"));
+        createProductButton.click();
+
+        WebElement productNameInput = driver.findElement(By.id("nameInput"));
+        productNameInput.clear();
+        productNameInput.sendKeys(name);
+
+        WebElement productQuantityInput = driver.findElement(By.id("quantityInput"));
+        productQuantityInput.clear();
+        productQuantityInput.sendKeys(quantity);
+
+        WebElement submitButton = driver.findElement(By.id("submit"));
+        submitButton.click();
+    }
+
+    void verifyProductDetails(WebElement productRow, String expectedName, String expectedQuantity) {
+        String actualProductName = productRow.findElement(By.cssSelector("td:nth-child(1)")).getText();
+        assertEquals(expectedName, actualProductName);
+
+        String actualProductQuantity = productRow.findElement(By.cssSelector("td:nth-child(2)")).getText();
+        assertEquals(expectedQuantity, actualProductQuantity);
     }
 }
