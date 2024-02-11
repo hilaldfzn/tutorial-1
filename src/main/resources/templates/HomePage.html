@@ -46,23 +46,26 @@
         function formatTimeUnit(unit) {
             return unit < 10 ? '0' + unit : unit;
         }
-
+    
         function displayTime() {
             const now = new Date();
-            const timeString = [
+            const dateString = [
                 formatTimeUnit(now.getDate()),
                 formatTimeUnit(now.getMonth() + 1),
-                ('' + now.getFullYear()).substr(-2),
+                now.getFullYear()
+            ].join('/');
+    
+            const timeString = [
                 formatTimeUnit(now.getHours()),
                 formatTimeUnit(now.getMinutes()),
                 formatTimeUnit(now.getSeconds())
-            ].join('/');
+            ].join(':');
 
-            document.getElementById("time").innerHTML = timeString;
+            document.getElementById("time").innerHTML = dateString + " - " + timeString;
         }
-
+    
         setInterval(displayTime, 1000);
         displayTime();
-    </script>
+    </script>    
 </body>
 </html>
