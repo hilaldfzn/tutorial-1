@@ -85,7 +85,7 @@ class ProductControllerTest {
                 .param("productName", "Updated Product")
                 .param("productQuantity", "20"))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("list"));
+                .andExpect(redirectedUrl("../list"));
 
         verify(productService, times(1)).edit(any(Product.class));
     }
@@ -105,7 +105,7 @@ class ProductControllerTest {
                 .param("productName", product.getProductName())
                 .param("productQuantity", String.valueOf(product.getProductQuantity())))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("list"));
+                .andExpect(redirectedUrl("../list"));
 
         verify(productService, never()).edit(product);
     }
@@ -117,7 +117,7 @@ class ProductControllerTest {
 
         mockMvc.perform(get("/product/edit/" + nonExistentProductId))
             .andExpect(status().is3xxRedirection())
-            .andExpect(redirectedUrl("list"));
+            .andExpect(redirectedUrl("../list"));
 
         verify(productService, times(1)).findById(nonExistentProductId);
     }
@@ -131,7 +131,7 @@ class ProductControllerTest {
 
         mockMvc.perform(get("/product/delete/{productId}", productId))
             .andExpect(status().is3xxRedirection())
-            .andExpect(redirectedUrl("list"));
+            .andExpect(redirectedUrl("../list"));
 
         verify(productService, times(1)).delete(product);
     }
@@ -143,7 +143,7 @@ class ProductControllerTest {
 
         mockMvc.perform(get("/product/delete/" + nonExistentProductId))
                .andExpect(status().is3xxRedirection())
-               .andExpect(redirectedUrl("list"));
+               .andExpect(redirectedUrl("../list"));
 
         verify(productService, never()).delete(any(Product.class));
     }
