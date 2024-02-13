@@ -48,6 +48,14 @@ Selama mengerjakan tutorial ini, saya mengalami beberapa kesalahan, seperti typo
 
 ## **Tutorial Modul 2: CI/CD DevOps**
 
+### Deployment
+Link untuk menuju aplikasi dapat diakses melalui [E-Shop](https://advpro-tutorial-hilaldfzn.koyeb.app).
+
+### SonarCloud Report
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=hilaldfzn_tutorial-1&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=hilaldfzn_tutorial-1)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=hilaldfzn_tutorial-1&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=hilaldfzn_tutorial-1)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=hilaldfzn_tutorial-1&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=hilaldfzn_tutorial-1)
+
 **Reflection**
 
 You have implemented a CI/CD process that automatically runs the test suites, analyzes code quality, and deploys to a PaaS. Try to answer the following questions in order to reflect on your attempt completing the tutorial and exercise.
