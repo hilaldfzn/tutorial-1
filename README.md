@@ -52,6 +52,7 @@ Selama mengerjakan tutorial ini, saya mengalami beberapa kesalahan, seperti typo
 Link untuk menuju aplikasi dapat diakses melalui [E-Shop](https://advpro-tutorial-hilaldfzn.koyeb.app).
 
 ### SonarCloud Report
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=hilaldfzn_tutorial-1&metric=coverage)](https://sonarcloud.io/summary/new_code?id=hilaldfzn_tutorial-1)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=hilaldfzn_tutorial-1&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=hilaldfzn_tutorial-1)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=hilaldfzn_tutorial-1&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=hilaldfzn_tutorial-1)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=hilaldfzn_tutorial-1&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=hilaldfzn_tutorial-1)
@@ -61,7 +62,14 @@ Link untuk menuju aplikasi dapat diakses melalui [E-Shop](https://advpro-tutoria
 You have implemented a CI/CD process that automatically runs the test suites, analyzes code quality, and deploys to a PaaS. Try to answer the following questions in order to reflect on your attempt completing the tutorial and exercise.
 1. List the code quality issue(s) that you fixed during the exercise and explain your strategy on fixing them.
 
-    Ketika saya melakukan push dengan workflow `sonarcloud.yml`, saya tidak menemukan *code quality issue* pada dashboard SonarCloud, yang mungkin menunjukkan bahwa kode saya sudah memenuhi standar kualitas yang ditetapkan oleh SonarCloud. Saya memastikan bahwa semua konfigurasi SonarCloud sesuai dan mencakup semua direktori atau file yang relevan dalam proyek saya, serta memeriksa log pada CI/CD pipeline untuk memastikan tidak ada langkah yang gagal atau error yang menghambat proses berjalannya workflow. Jadi, untuk *code quality issue* pada refleksi nomor 1 ini, mungkin saya tidak perlu memberikan list dari *code quality issue* yang dialami dan bagaimana strategi untuk menyelesaikannya.
+    Ketika saya melakukan push dengan workflow `sonarcloud.yml`, saya hanya menemukan satu *code quality issue* pada dashboard SonarCloud, yang mungkin menunjukkan bahwa kode saya sudah cukup memenuhi standar kualitas yang ditetapkan oleh SonarCloud. Saya memastikan bahwa semua konfigurasi SonarCloud sesuai dan mencakup semua direktori atau file yang relevan dalam repositori saya, serta memeriksa log pada CI/CD pipeline untuk memastikan tidak ada langkah yang gagal atau error yang menghambat proses berjalannya workflow. Jadi, untuk *code quality issue* pada refleksi nomor 1 ini, mungkin saya hanya perlu memberikan satu issue dari *code quality issue* yang dialami dan bagaimana strategi untuk menyelesaikannya.
+
+    * Redundansi redirect *url* pada ProductController. <br/>
+    Solusi untuk memperbaikinya adalah dengan mendefinisikan variable constant untuk return redirect *url* yang akan dipakai berulang.
+
+        ```java
+        private static final String REDIRECT_LIST = "redirect:../list";
+        ```
 
 2. Look at your CI/CD workflows (GitHub)/pipelines (GitLab). Do you think the current implementation has met the definition of Continuous Integration and Continuous Deployment? Explain the reasons (minimum 3 sentences)!
 
