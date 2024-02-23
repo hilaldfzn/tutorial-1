@@ -18,10 +18,10 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class CarServiceTest {
     @Mock
-    private CarRepository carRepository;
+    CarRepository carRepository;
 
     @InjectMocks
-    private CarServiceImpl carServiceImpl;
+    CarServiceImpl carServiceImpl;
 
     @BeforeEach
     void setup() {}
