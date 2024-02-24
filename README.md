@@ -3,6 +3,15 @@
 **2206830542**<br/>
 **Pemrograman Lanjut C**<br/>
 
+### Deployment
+Link untuk menuju aplikasi dapat diakses melalui [E-Shop](https://advpro-tutorial-hilaldfzn.koyeb.app).
+
+### SonarCloud Report
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=hilaldfzn_tutorial-1&metric=coverage)](https://sonarcloud.io/summary/new_code?id=hilaldfzn_tutorial-1)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=hilaldfzn_tutorial-1&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=hilaldfzn_tutorial-1)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=hilaldfzn_tutorial-1&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=hilaldfzn_tutorial-1)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=hilaldfzn_tutorial-1&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=hilaldfzn_tutorial-1)
+
 ## **Tutorial Modul 1: Coding Standards**
 
 **Reflection 1**
@@ -46,16 +55,7 @@ Selama mengerjakan tutorial ini, saya mengalami beberapa kesalahan, seperti typo
 
     Menurut saya, penggunaan *class Java* terpisah yang hanya untuk memeriksa jumlah item dapat mengurangi *cleanliness of the code* karena *functional test* untuk memverifikasi nama produk dan jumlah produk dalam daftar tidak terlalu berbeda, sehingga menghasilkan banyak duplikasi kode. Hal ini tidak hanya membuat kode menjadi kurang rapi, tetapi juga menimbulkan risiko tambahan dalam pemeliharaan. Contohnya setiap perubahan pada sistem, seperti modifikasi template HTML, memaksa perubahan pada kedua *class* secara terpisah. Solusi yang saya sarankan adalah menggabungkan kedua *class* tersebut menjadi satu dan memindahkan baris kode yang berulang ke dalam *method* yang dapat digunakan bersama, seperti *method setup* yang melakukan simulasi pembuatan produk. Hal ini tidak hanya meningkatkan kebersihan dan kualitas kode, tetapi juga memudahkan dalam hal pemeliharaan dan pengujian karena telah memverifikasi banyak aspek setelah produk dibuat tanpa masalah yang berkaitan dengan prinsip *Clean Code* atau *Code Quality*.
 
-## **Tutorial Modul 2: CI/CD DevOps**
-
-### Deployment
-Link untuk menuju aplikasi dapat diakses melalui [E-Shop](https://advpro-tutorial-hilaldfzn.koyeb.app).
-
-### SonarCloud Report
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=hilaldfzn_tutorial-1&metric=coverage)](https://sonarcloud.io/summary/new_code?id=hilaldfzn_tutorial-1)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=hilaldfzn_tutorial-1&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=hilaldfzn_tutorial-1)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=hilaldfzn_tutorial-1&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=hilaldfzn_tutorial-1)
-[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=hilaldfzn_tutorial-1&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=hilaldfzn_tutorial-1)
+## **Tutorial Modul 2: CI/CD & DevOps**
 
 **Reflection**
 
@@ -74,3 +74,30 @@ You have implemented a CI/CD process that automatically runs the test suites, an
 2. Look at your CI/CD workflows (GitHub)/pipelines (GitLab). Do you think the current implementation has met the definition of Continuous Integration and Continuous Deployment? Explain the reasons (minimum 3 sentences)!
 
     Menurut saya, saat ini saya telah mengimplementasikan CI/CD, yang di mana Continuous Integration mencakup tahapan Code dan Test, sedangkan Continuous Delivery/Deployment menangani bagian Operational dan Review. Kode dalam workflow `ci.yml` akan mengotomatiskan proses *testing* setiap kali saya melakukan *push* atau *pull request* ke suatu *branch*. Kemudian untuk kebersihan dan kualitas kode akan dicek melalui workflow `scorecard.yml` dan `sonarcloud.yml`. Untuk deployment, `Koyeb` sebagai PaaS juga telah mengimplementasikan beberapa CI/CD untuk mengotomatiskan proses deployment setiap kali ada *push* atau *pull request* dari repositori. Sehingga berdasarkan workflow CI/CD yang saya implementasikan, proses Continuous Integration dan Continuous Deployment/Delivery (CI/CD) sepertinya sudah tercapai.
+    
+## **Tutorial Modul 3: Maintanability & OO Principles**
+
+**Reflection**
+
+Apply the SOLID principles you have learned. You are allowed to modify the source code according to the principles you want to implement. Please answer the following questions: 
+
+1) Explain what principles you apply to your project!
+
+     Berikut ini adalah beberapa prinsip SOLID yang saya terapkan:
+    - Single Responsibilty Principle (SRP) <br/>
+        Awalnya pada branch `before-solid`, file `ProductController.java` berisi dua class controller yang berbeda, yang bertentangan dengan aturan SRP. Untuk menerapkan prinsip ini, saya memisahkan tanggung jawab kedua class dengan membuat file baru `CarController.java` untuk class `CarController`, yang memastikan setiap class memiliki satu alasan untuk berubah. Saya menerapkan SRP pada `HomePageController`, `ProductController`, dan `CarController`, dengan setiap controller bertanggung jawab atas endpoint berbeda (/, /product, /car), yang memisahkan tanggung jawab berdasarkan area fungsionalitas.
+    
+    - Liskov Substitution Principle (LSP) <br/>
+        `CarController` awalnya merupakan *subclass* dari `ProductController`, meskipun keduanya memiliki perilaku yang berbeda. Ini menunjukkan bahwa `CarController` tidak cocok untuk menjadi *subclass* dari `ProductController` karena tidak memenuhi aturan LSP, yang mengharuskan objek dari *subclass* dapat menggantikan objek dari *superclass* tanpa mengganggu fungsionalitas. Solusi yang saya terapkan adalah menghilangkan hubungan *inheritance* antara kedua controller tersebut dengan menghapus *extends* dan menjadikan `CarController` sebagai class yang independen dan berada di dalam file terpisah serta memastikan kedua class tersebut berdiri sendiri.
+        
+    - Dependency Inversion Principle (DIP) <br/>
+        Pada awalnya, class `CarController` mempunyai *dependency* pada class `CarServiceImpl`. Menurut aturan DIP, seharusnya class tersebut bergantung pada *interface* atau *abstract class*, bukan bergantung langsung pada implementasi di *concrete class*. Untuk menerapkan prinsip ini, saya mengubah class `CarController` untuk bergantung pada *interface* `CarService` bukan *concrete class* `CarServiceImpl` dengan mengubah tipe data dari `CarServiceImpl` menjadi `CarService`.
+
+2) Explain the advantages of applying SOLID principles to your project with examples.
+
+    Keuntungan dari menerapkan prinsip SOLID adalah meningkatkan modularitas, kebersihan kode, dan kemudahan dalam pemeliharaan kode. Menurut saya, hal ini meminimalisir usaha yang diperlukan untuk melakukan modifikasi, karena perubahan besar pada satu bagian kode tidak memengaruhi bagian lain. Sebagai contoh, saya menerapkan Dependency Inversion Principle dalam `CarController` yang bergantung pada *interface* `CarService` bukan implementasi konkret `CarServiceImpl`. Artinya, saya hanya perlu mengubah implementasi pada *layer service* tanpa perlu memodifikasi `CarController`. Jika terjadi perubahan pada *business logic* berarti kita tidak perlu memodifikasi kelas lain yang bergantung padanya. Pendekatan prinsip ini tidak hanya memudahkan pemeliharaan tetapi juga mempermudah *code review* jika berkolaborasi dalam tim dan mengurangi kompleksitas pemahaman kode, sehingga memastikan kode tetap dapat diakses dan mudah dikelola dalam skala yang lebih besar.
+
+3) Explain the disadvantages of not applying SOLID principles to your project with examples.
+
+    Kerugian jika tidak menerapkan prinsip SOLID adalah dapat mengakibatkan berbagai kesulitan dalam pengembangan dan pemeliharaan kode, seperti kode sulit dikelola, sulit menambah fitur, tidak fleksibel, dan apabila menemukan error atau bug akan sulit melacak penyebabnya. Misalnya, jika Single Responsibility Principle (SRP) diabaikan, seperti dalam kasus `CarController` yang tidak dipisahkan dari `ProductController`, dapat menyulitkan kita untuk menemukan dan memahami bagian kode yang spesifik, karena tanggung jawab yang seharusnya terpisah malah digabungkan. 
+    Selain itu, tanpa penerapan prinsip SOLID bisa menyebabkan minimnya *reusability* karena ketergantungan yang ketat antar komponen atau *tightly coupled* dan kode akan penuh dengan duplikasi, yang pada akhirnya memperlambat proses pengembangan dan meningkatkan effort untuk modifikasi.
