@@ -286,4 +286,13 @@ class PaymentTest {
         });
         paymentData.clear();
     }
+
+    @Test
+    void testSetPaymentDataWithUnsupportedMethod() {
+        paymentData.put("key", "value");
+        
+         assertThrows(IllegalArgumentException.class, () -> {
+            new Payment("e6e60d39-41fb-4ff0-8631-3491e483c180", "RAWR", order, paymentData);
+        });
+    }
 }
