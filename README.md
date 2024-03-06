@@ -101,3 +101,14 @@ Apply the SOLID principles you have learned. You are allowed to modify the sourc
 
     Kerugian jika tidak menerapkan prinsip SOLID adalah dapat mengakibatkan berbagai kesulitan dalam pengembangan dan pemeliharaan kode, seperti kode sulit dikelola, sulit menambah fitur, tidak fleksibel, dan apabila menemukan error atau bug akan sulit melacak penyebabnya. Misalnya, jika Single Responsibility Principle (SRP) diabaikan, seperti dalam kasus `CarController` yang tidak dipisahkan dari `ProductController`, dapat menyulitkan kita untuk menemukan dan memahami bagian kode yang spesifik, karena tanggung jawab yang seharusnya terpisah malah digabungkan. 
     Selain itu, tanpa penerapan prinsip SOLID bisa menyebabkan minimnya *reusability* karena ketergantungan yang ketat antar komponen atau *tightly coupled* dan kode akan penuh dengan duplikasi, yang pada akhirnya memperlambat proses pengembangan dan meningkatkan effort untuk modifikasi.
+
+## **Tutorial Modul 4: TDD & Refactoring**
+
+**Reflection**
+1. Reflect based on Percival (2017) proposed self-reflective questions (in “Principles and Best Practice of Testing” submodule, chapter “Evaluating Your Testing Objectives”), whether this TDD flow is useful enough for you or not. If not, explain things that you need to do next time you make more tests.
+    
+    Menurut saya, prosedur TDD sangat berguna dan memberikan banyak keuntungan, seperti peningkatan *correctness*, *maintainability*, dan *workflow efficiency*. Awalnya, saya menemukan kesulitan dalam merancang test sebelum pengembangan class yang sebenarnya, namun saya menyadari bahwa TDD memfasilitasi pembuatan kode yang lebih aman dan memudahkan proses *refactoring* karena perubahan dapat langsung diuji. Selain itu, penting untuk mengembangkan test yang mengevaluasi interaksi antar fitur untuk memastikan lebih lanjut keakuratan kode. Misalnya, dengan menguji pembuatan, pembaruan, dan penghapusan banyak produk secara bersamaan. Ini akan menambah keamanan dan memastikan bahwa semua komponen berinteraksi dengan baik.
+
+2. You have created unit tests in Tutorial. Now reflect whether your tests have successfully followed F.I.R.S.T. principle or not. If not, explain things that you need to do the next time you create more tests.
+
+    Menurut saya, test-test yang telah saya buat mematuhi prinsip F.I.R.S.T, karena saya telah merancang pembuatan test yang efisien untuk mengevaluasi kode secara menyeluruh. Setiap test melakukan pemeriksaan assertion untuk memverifikasi keakuratan output dan dirancang untuk dapat dijalankan kembali yang memungkinkan pengujian konsisten setiap ada modifikasi pada kode. Test saya juga sudah mengcover semua *happy path* dan *unhappy path*, serta semua kemungkinan kesalahan dan hasil.
