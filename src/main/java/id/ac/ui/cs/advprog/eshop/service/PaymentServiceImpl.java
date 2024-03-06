@@ -28,7 +28,7 @@ public class PaymentServiceImpl implements PaymentService {
 
         if (payment.getStatus().equals(PaymentStatus.SUCCESS.getValue())) {
             payment.getOrder().setStatus(OrderStatus.SUCCESS.getValue());
-        } else if (payment.getStatus().equals(PaymentStatus.REJECTED.getValue())) {
+        } else {
             payment.getOrder().setStatus(OrderStatus.FAILED.getValue());
         }
     }
