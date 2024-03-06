@@ -43,7 +43,7 @@ class OrderTest {
         Order order = new Order("136522556-012a-4c07-b546-54eb1396d79b", 
             this.products, 1708560000L, "Safira Sudrajat");
 
-        assertEquals(this.products, order.getProducts());
+        assertSame(this.products, order.getProducts());
         assertEquals(2, order.getProducts().size());
         assertEquals("Sampo Cap Bambang", order.getProducts().get(0).getProductName());
         assertEquals("Sabun Cap Usep", order.getProducts().get(1).getProductName());
